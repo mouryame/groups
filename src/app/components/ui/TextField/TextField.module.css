@@ -1,0 +1,13 @@
+.textField {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.textField:focus {
+  outline: none;
+  border-color: var(--color-blue-700);
+}
