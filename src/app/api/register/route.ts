@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import connectDB from "../../../mongoDB";
 import { user } from "@/models";
 import bcrypt from "bcrypt";
+import jsonWebToken from "jsonwebtoken";
 
 export async function POST(request: Request) {
   const { name, email, password } = await request.json();
@@ -23,7 +24,10 @@ export async function POST(request: Request) {
     password: hashedPassword,
   });
 
-  console.log(newUser);
+  const token = jsonWebToken.sign(
+    { email: newUser.email, _id: newUser._id },
+    process.env.JWT_SECRET as string
+  );
 
-  return NextResponse.json({ message: "User created", data: newUser });
+  return NextResponse.json({ message: "User created", data: newUser, token });
 }
