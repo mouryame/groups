@@ -1,9 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import useGetUser from "@/hooks/useGetUser";
 import isObjectEmpty from "@/utils/isObjectEmpty";
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function ProtectedRoute({
   children,
@@ -12,12 +12,20 @@ export default function ProtectedRoute({
 }) {
   console.log("inside ProtectedRoute");
 
+  const router = useRouter();
   const user = useGetUser();
-  console.log(user);
+  const [isFirstRender, setIsFirstRender] = useState<Boolean>(true);
 
-  if (isObjectEmpty(user)) {
-    redirect("/login");
-  }
+  useEffect(() => {
+    if (!isFirstRender) {
+      console.log("inside ProtectedRoute useEffect", user, isObjectEmpty(user));
+
+      if (isObjectEmpty(user)) {
+        router.push("/login");
+      }
+    }
+    setIsFirstRender(false);
+  }, [user]);
 
   return children;
 }
