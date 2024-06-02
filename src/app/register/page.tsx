@@ -32,6 +32,14 @@ export default function Page() {
           <TextField label="Password" type="password" name="password" />
           <Button fullWidth>Register</Button>
         </form>
+
+        <Flex
+          horizontal="center"
+          vertical="center"
+          customStyles={{ marginTop: "1rem" }}
+        >
+          <a href="/login">Already have an account?</a>
+        </Flex>
       </Card>
     </Flex>
   );

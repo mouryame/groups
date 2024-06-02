@@ -22,13 +22,21 @@ export default function Page() {
     }
   }
   return (
-    <Flex fullscreen customStyles={{ height: "100vh" }}>
+    <Flex direction="column" fullscreen customStyles={{ height: "100vh" }}>
       <Card fullWidth>
         <form onSubmit={handleLogin}>
           <TextField label="Email" type="email" name="email" />
           <TextField label="Password" type="password" name="password" />
           <Button fullWidth>Login</Button>
         </form>
+
+        <Flex
+          horizontal="center"
+          vertical="center"
+          customStyles={{ marginTop: "1rem" }}
+        >
+          <a href="/register">Don't have an account? Register</a>
+        </Flex>
       </Card>
     </Flex>
   );
