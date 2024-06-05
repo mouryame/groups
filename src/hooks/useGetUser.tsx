@@ -1,32 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import useFetch, { StateType } from "./useFetch";
 
 export default function useGetUser() {
-  const [user, setUser] = useState({});
+  const { data }: StateType = useFetch("/api/user");
 
-  useEffect(() => {
-    console.log("inside useGetUser");
-    async function fetchUser() {
-      const response = await fetch("/api/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await response.json();
-      if (data.error) {
-        localStorage.removeItem("token");
-        setUser({});
-      } else {
-        setUser(data);
-      }
-    }
-
-    fetchUser();
-
-    return () => {};
-  }, []);
-
-  return user;
+  return data;
 }

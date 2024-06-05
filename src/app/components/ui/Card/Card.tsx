@@ -1,6 +1,6 @@
 import styles from "./Card.module.css";
 
-interface CardProps {
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   fullWidth?: boolean;
   customStyles?: object;
   customClass?: string;
@@ -11,11 +11,13 @@ export default function Card({
   customStyles,
   customClass,
   children,
+  ...props
 }: CardProps) {
   return (
     <div
       style={{ width: fullWidth ? "100%" : "auto", ...customStyles }}
       className={`${styles.card} ${customClass || ""}`}
+      {...props}
     >
       {children}
     </div>

@@ -35,7 +35,7 @@ export default function Page() {
           vertical="center"
           customStyles={{ marginTop: "1rem" }}
         >
-          <a href="/register">Don't have an account? Register</a>
+          <a href="/register">{`Don't have an account? Register`}</a>
         </Flex>
       </Card>
     </Flex>
